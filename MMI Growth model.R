@@ -22,6 +22,9 @@
 # included within loops, so the code is quite repetitive. 
 ################################################################################
 
+# Clear console and remove list objects
+cat("\014");rm(list=ls())
+
 # Specify libraries required for analysis
 library(nlstools)
 library(RCurl)
@@ -29,17 +32,15 @@ library(ggplot2)
 library(dplyr)
 
 # Load example data from github
-url<-("https://raw.githubusercontent.com/alharry/spot-tail/master/SSS.csv")
-data <- getURL(url)                
-# If this step doesnt work use this, but read this first
+# If sss.verifypeer = TRUE doesn't work, set to false, but read this:
 # http://ademar.name/blog/2006/04/curl-ssl-certificate-problem-v.html
-data <- getURL(url,ssl.verifypeer = FALSE)
-
-data <- read.csv(textConnection(data),sep=",")
+data <- getURL("https://raw.githubusercontent.com/alharry/spot-tail/master/SSS.csv",ssl.verifypeer = FALSE)%>%
+        textConnection()%>%
+        read.csv(sep=",")%>%
+        tbl_df()
 
 # Skip to here and load your data if you don't want to use the 
 # example dataset
-
 
 # Specify sex: "m", "f" or "both"
 sex="f"
