@@ -1,5 +1,5 @@
 ###############################################################################
-# 11/01/2016
+# 20/02/2016
 # Author: Alastair V Harry - alastair.harry@gmail.com
 # Deptartment of Fisheries Western Australia & 
 # Centre For Sustainable Tropical Fisheries & Aquaculture
@@ -10,14 +10,8 @@
 # from the Great Barrier Reef World Heritage Area, north-eastern Australia. 
 # Marine and Freshwater Research
 #
-# Description: An R-script for doing a multi-model analysis of fish growth
-# and plotting with confidence intervals. This version includes six
-# deterministic growth models. Obviously more can be included 
-# although the section that does bootstrapping and confidence intervals 
-# is only set up to plot models that have 2 or 3 parameters at the moment, so a 
-# model with more parameters probably isn't going to work. Style of outputs
-# follows Walker (2005) Reproduction in fisheries science. 
 #
+# Work in progress
 ################################################################################
 
 # Clear console and remove list objects
@@ -38,7 +32,7 @@ data <- getURL("https://raw.githubusercontent.com/alharry/spot-tail/master/SSS.c
   textConnection()%>%
   read.csv(sep=",")%>%
   tbl_df()
-data<-read.csv("SSS.csv")
+
 # Skip to here and load your data if you don't want to use the 
 # example dataset
 
@@ -98,8 +92,6 @@ names(xy)<-c("y","x")
 # same model in your set of candidate models.
 
 # G1 - 3 parameter VB
-
-
 mo<- VB3
 P<-c(b1=start.linf[[1]],b2=start.L0[[1]],b3=start.k[[1]])
 Test<-fit(mo,P,xy)

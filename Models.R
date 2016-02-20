@@ -38,7 +38,7 @@ fit = function(mo,p,data){
   # Solve for best fit paramters
   Opt<-nlminb(p, function(p, data){
     r = data$y - mo$value(p,data)
-    sum(dnorm(data$y,mean=mo$value(p,data),sd=SD,log=T))
+    #sum(dnorm(data$y,mean=mo$value(p,data),sd=SD,log=T))
     return(r %*% r)
   }, gradient = mo$gradient, hessian = mo$hessian, data=data)
   # Residuals
